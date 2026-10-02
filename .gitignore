@@ -1,0 +1,31 @@
+# Terraform
+.terraform/
+.terraform.lock.hcl.bak
+*.tfstate
+*.tfstate.*
+*.tfvars
+!*.tfvars.example
+crash.log
+override.tf
+override.tf.json
+*_override.tf
+build/
+
+# Python
+__pycache__/
+*.pyc
+.pytest_cache/
+.venv/
+venv/
+*.egg-info/
+
+# Secrets and local config
+.env
+*.pem
+*.key
+credentials
+
+# Scan output
+reports/
+*.sarif
+sbom.cdx.json

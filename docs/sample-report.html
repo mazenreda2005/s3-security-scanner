@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>S3 security report, account 123456789012</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #13263B; --steel: #5B6B7C; --paper: #FBFCFD; --rule: #DCE2E8; --wash: #EEF2F6;
+    --sans: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+    --mono: "IBM Plex Mono", ui-monospace, Consolas, monospace;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--paper); color: var(--ink); font: 16px/1.55 var(--sans); }
+  main { max-width: 960px; margin: 0 auto; padding: 48px 24px 80px; }
+  header { display: grid; grid-template-columns: 1fr auto; gap: 24px; align-items: end;
+           border-bottom: 2px solid var(--ink); padding-bottom: 24px; }
+  h1 { font-size: 28px; line-height: 1.2; margin: 0 0 6px; }
+  header p { margin: 0; color: var(--steel); }
+  .score { text-align: right; }
+  .score b { display: block; font-size: 88px; line-height: .9; font-weight: 700;
+              color: #B3261E; letter-spacing: -2px; }
+  .score span { color: var(--steel); font-size: 14px; }
+  .bar { display: flex; height: 14px; margin: 32px 0 12px; border-radius: 2px; overflow: hidden; gap: 2px; }
+  .legend { display: flex; flex-wrap: wrap; gap: 20px; list-style: none; padding: 0; margin: 0 0 8px;
+             color: var(--steel); font-size: 14px; }
+  .legend i { display: inline-block; width: 10px; height: 10px; margin-right: 6px; border-radius: 2px; }
+  .legend b { color: var(--ink); margin-left: 4px; }
+  .pab { padding: 12px 16px; border-left: 4px solid; margin: 24px 0; background: var(--wash); }
+  .ok-box { border-color: #2E7D4F; } .warn-box { border-color: #B3261E; }
+  h2 { font-size: 20px; margin: 40px 0 12px; }
+  details { border-top: 1px solid var(--rule); }
+  details:last-of-type { border-bottom: 1px solid var(--rule); }
+  summary { display: grid; grid-template-columns: 1fr auto auto; gap: 16px; align-items: center;
+             padding: 14px 4px; cursor: pointer; list-style: none; }
+  summary::-webkit-details-marker { display: none; }
+  summary:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+  summary code { font: 500 15px var(--mono); overflow-wrap: anywhere; }
+  .meta { color: var(--steel); font-size: 14px; }
+  .sev { font-size: 13px; font-weight: 600; color: var(--c); border: 1.5px solid var(--c);
+          padding: 1px 8px; border-radius: 3px; white-space: nowrap; }
+  .ok { font-size: 13px; color: #2E7D4F; font-weight: 600; }
+  .findings { list-style: none; padding: 0 4px 16px; margin: 0; }
+  .findings li { display: grid; grid-template-columns: 84px 1fr; gap: 12px; padding: 10px 0; }
+  .findings li .sev { justify-self: start; align-self: start; }
+  .findings p { margin: 2px 0 6px; color: var(--steel); max-width: 70ch; }
+  .fix { font: 13px/1.5 var(--mono); background: var(--wash); padding: 10px 12px; margin: 0;
+          white-space: pre-wrap; overflow-wrap: anywhere; border-radius: 3px; }
+  .clean { color: var(--steel); padding: 0 4px 16px; margin: 0; }
+  footer { margin-top: 48px; color: var(--steel); font-size: 13px; }
+  @media (max-width: 640px) {
+    header { grid-template-columns: 1fr; } .score { text-align: left; }
+    summary { grid-template-columns: 1fr auto; } .meta { display: none; }
+    .findings li { grid-template-columns: 1fr; gap: 4px; }
+  }
+  @media print { details { break-inside: avoid; } details:not([open]) > *:not(summary) { display: block; } }
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <div>
+      <h1>S3 security report</h1>
+      <p>AWS account 123456789012, scanned 2026-10-02 13:50 UTC</p>
+      <p>4 buckets, 15 failed checks</p>
+    </div>
+    <div class="score"><b>56</b><span>Security score out of 100</span></div>
+  </header>
+
+  <div class="bar" role="img" aria-label="Failed checks by severity"><span style="flex:2;background:#B3261E" title="Critical: 2"></span><span style="flex:4;background:#C8620A" title="High: 4"></span><span style="flex:6;background:#A8820F" title="Medium: 6"></span><span style="flex:3;background:#3A6EA5" title="Low: 3"></span></div>
+  <ul class="legend"><li><i style="background:#B3261E"></i>Critical <b>2</b></li><li><i style="background:#C8620A"></i>High <b>4</b></li><li><i style="background:#A8820F"></i>Medium <b>6</b></li><li><i style="background:#3A6EA5"></i>Low <b>3</b></li></ul>
+  <p class="pab warn-box"><strong>Account-level Block Public Access:</strong> Not configured at the account level.</p>
+
+  <h2>Buckets</h2>
+  <details open><summary><code>acme-customer-exports</code><span class="meta">1/7 checks passed</span><span class="sev" style="--c:#B3261E">Critical</span></summary><ul class="findings"><li><span class="sev" style="--c:#B3261E">Critical</span><div><strong>Bucket policy is not public</strong><p>The bucket policy grants access to the public.</p><pre class="fix">Remove statements with Principal &#x27;*&#x27; that lack restrictive conditions, or enable Block Public Access (BlockPublicPolicy, RestrictPublicBuckets).</pre></div></li><li><span class="sev" style="--c:#C8620A">High</span><div><strong>Block Public Access enabled</strong><p>No bucket-level Block Public Access configuration.</p><pre class="fix">aws s3api put-public-access-block --bucket acme-customer-exports --public-access-block-configuration BlockPublicAcls=true,IgnorePublicAcls=true,BlockPublicPolicy=true,RestrictPublicBuckets=true</pre></div></li><li><span class="sev" style="--c:#C8620A">High</span><div><strong>Default encryption uses KMS</strong><p>No default encryption configured.</p><pre class="fix">Enable default encryption with SSE-KMS.</pre></div></li><li><span class="sev" style="--c:#A8820F">Medium</span><div><strong>Versioning enabled</strong><p>Versioning is Disabled. Deleted or overwritten objects cannot be recovered (ransomware risk).</p><pre class="fix">aws s3api put-bucket-versioning --bucket acme-customer-exports --versioning-configuration Status=Enabled</pre></div></li><li><span class="sev" style="--c:#A8820F">Medium</span><div><strong>HTTPS-only access enforced</strong><p>Bucket policy does not deny plain-HTTP requests.</p><pre class="fix">Add a Deny statement for s3:* when aws:SecureTransport is false.</pre></div></li><li><span class="sev" style="--c:#3A6EA5">Low</span><div><strong>Server access logging enabled</strong><p>No access logs. You cannot see who read or changed objects.</p><pre class="fix">Enable server access logging to a dedicated log bucket, or CloudTrail data events for sensitive buckets.</pre></div></li></ul></details>
+<details open><summary><code>acme-marketing-assets</code><span class="meta">1/7 checks passed</span><span class="sev" style="--c:#B3261E">Critical</span></summary><ul class="findings"><li><span class="sev" style="--c:#B3261E">Critical</span><div><strong>Bucket ACL is not public</strong><p>ACL grants READ to everyone on the internet.</p><pre class="fix">aws s3api put-bucket-ownership-controls --bucket acme-marketing-assets --ownership-controls &#x27;Rules=[{ObjectOwnership=BucketOwnerEnforced}]&#x27;</pre></div></li><li><span class="sev" style="--c:#C8620A">High</span><div><strong>Block Public Access enabled</strong><p>No bucket-level Block Public Access configuration.</p><pre class="fix">aws s3api put-public-access-block --bucket acme-marketing-assets --public-access-block-configuration BlockPublicAcls=true,IgnorePublicAcls=true,BlockPublicPolicy=true,RestrictPublicBuckets=true</pre></div></li><li><span class="sev" style="--c:#C8620A">High</span><div><strong>Default encryption uses KMS</strong><p>No default encryption configured.</p><pre class="fix">Enable default encryption with SSE-KMS.</pre></div></li><li><span class="sev" style="--c:#A8820F">Medium</span><div><strong>Versioning enabled</strong><p>Versioning is Disabled. Deleted or overwritten objects cannot be recovered (ransomware risk).</p><pre class="fix">aws s3api put-bucket-versioning --bucket acme-marketing-assets --versioning-configuration Status=Enabled</pre></div></li><li><span class="sev" style="--c:#A8820F">Medium</span><div><strong>HTTPS-only access enforced</strong><p>No bucket policy, so plain-HTTP requests are allowed.</p><pre class="fix">Add a Deny statement for s3:* when aws:SecureTransport is false.</pre></div></li><li><span class="sev" style="--c:#3A6EA5">Low</span><div><strong>Server access logging enabled</strong><p>No access logs. You cannot see who read or changed objects.</p><pre class="fix">Enable server access logging to a dedicated log bucket, or CloudTrail data events for sensitive buckets.</pre></div></li></ul></details>
+<details><summary><code>acme-app-logs</code><span class="meta">3/7 checks passed</span><span class="sev" style="--c:#A8820F">Medium</span></summary><ul class="findings"><li><span class="sev" style="--c:#A8820F">Medium</span><div><strong>Versioning enabled</strong><p>Versioning is Disabled. Deleted or overwritten objects cannot be recovered (ransomware risk).</p><pre class="fix">aws s3api put-bucket-versioning --bucket acme-app-logs --versioning-configuration Status=Enabled</pre></div></li><li><span class="sev" style="--c:#A8820F">Medium</span><div><strong>HTTPS-only access enforced</strong><p>No bucket policy, so plain-HTTP requests are allowed.</p><pre class="fix">Add a Deny statement for s3:* when aws:SecureTransport is false.</pre></div></li><li><span class="sev" style="--c:#3A6EA5">Low</span><div><strong>Default encryption uses KMS</strong> (warning)<p>Encrypted with AES256 (S3-managed keys). Data is encrypted, but you cannot audit or revoke key usage.</p><pre class="fix">For sensitive data, switch to SSE-KMS with a customer-managed key.</pre></div></li><li><span class="sev" style="--c:#3A6EA5">Low</span><div><strong>Server access logging enabled</strong><p>No access logs. You cannot see who read or changed objects.</p><pre class="fix">Enable server access logging to a dedicated log bucket, or CloudTrail data events for sensitive buckets.</pre></div></li></ul></details>
+<details><summary><code>acme-prod-backups</code><span class="meta">7/7 checks passed</span><span class="ok">No failures</span></summary><p class="clean">Every check passed for this bucket.</p></details>
+
+  <footer>Generated by s3-security-scanner. Score weights: critical 10, high 6, medium 3, low 1.</footer>
+</main>
+</body>
+</html>

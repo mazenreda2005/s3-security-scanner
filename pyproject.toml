@@ -1,0 +1,19 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "s3-security-scanner"
+version = "1.0.0"
+description = "Audit AWS S3 buckets for public exposure, encryption, versioning, TLS and logging."
+requires-python = ">=3.9"
+dependencies = ["boto3>=1.34"]
+
+[project.scripts]
+s3-scanner = "s3_scanner.cli:main"
+
+[tool.setuptools]
+packages = ["s3_scanner"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
